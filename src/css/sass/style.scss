@@ -1,0 +1,78 @@
+@charset "utf-8";
+
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-04-26 21:58:24 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-11-01 23:23:55
+ */
+
+
+// 导航栏
+nav{
+    padding: 15px;
+    background-color: #3366CC !important;
+
+    label#count{ color: #3366CC !important; }
+    label#total{ color: #3366CC !important; }
+    
+    .navbar-brand{
+        color: white !important;
+        font-size: 25px;
+    }
+    .navbar-nav{
+        a{
+            color: white !important;
+            font-size: 16px;
+        }
+        .dropdown-menu a{
+            color: black !important;
+            &:hover{
+                color: #3366CC !important;
+                font-weight: bold !important;
+            }
+        }
+    }
+
+    &.navbar-default .navbar-nav>.open>a,
+    &.navbar-default .navbar-nav>.open>a:focus,
+    &.navbar-default .navbar-nav>.open>a:hover{
+        background-color: #3366CC;
+        border-radius: 65px;
+    }
+}
+
+#main {
+    text-align: center;
+    // box-shadow: 5px 5px 5px #CCC;
+    padding-bottom: 20px;
+
+    form input {
+        height: 45px;
+    }
+    form > div:not(:nth-child(1)) input {
+        margin-left: -25px;
+        margin-right: 0px;
+    }
+    form > div:nth-child(1) input {
+        width: 370px;
+    }
+    form > div:nth-child(2) input {
+        width: 250px;
+    }
+    form > div:nth-child(3) input {
+        width: 120px;
+    }
+    form button {
+        background-color: #3366CC !important;
+        width: 100px;
+        height: 45px;
+        font-size: 17px;
+    }
+}
+
+#container {
+    .highlight {
+        background-color: #FFFF66 !important;
+    }
+}

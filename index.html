@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>量子文献数据库</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!---------------------------- stylesheet zone --------------------------------->
+	<link rel="stylesheet" type="text/css" href="./src/css/bootstrap/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="./src/css/style.css" />
+</head>
+<body>
+	<!-- 导航栏 -->
+	<nav class="navbar navbar-default header" role="navigation" id="navbar">
+		<div class="container-fluid">
+			<!-- 导航栏最左侧的标题栏 -->
+			<div class="navbar-header">
+				<a class="navbar-brand navbar-title" href="#">量子文献数据库</a>
+			</div>
+		</div>
+	</nav>
+
+	<!-- 主内容区域 -->
+	<div class="container-fluid" id="mainZone">
+		<div class="row col-lg-12 center-block" id="main">
+		<form role="form" class="form-inline">
+			<div class="form-group">
+				<!-- <label for="theme-input" class="col-sm-2 control-label">主题</label> -->
+				<div class="col-sm-10">
+				  	<input type="text" class="form-control" id="theme-input" placeholder="主题" />
+				</div>
+			</div>
+			<div class="form-group">
+				<!-- <label for="author-input" class="col-sm-2 control-label">作者</label> -->
+				<div class="col-sm-10">
+				  	<input type="text" class="form-control" id="author-input" placeholder="作者" />
+				</div>
+			</div>
+			<div class="form-group">
+				<!-- <label for="year-input" class="col-sm-2 control-label">年份</label> -->
+				<div class="col-sm-10">
+				  	<input type="number	" class="form-control" id="year-input" placeholder="年份" />
+				</div>
+			</div>		
+			<div class="form-group">
+				<div class="col-sm-10">
+				  	<button type="search" class="btn btn-primary" id="search">查询</button>
+				</div>
+			</div>
+		</form>
+		</div>
+		
+		<div class="row col-lg-10 col-lg-push-1 center-block" id="container">
+
+			<table class="table table-hover" id="container-table">
+				<thead>
+				  <tr>
+					<th style="width: 50px">序号</th>
+					<th style="width: 240px">标题</th>
+					<th style="width: 150px">作者</th>
+					<th style="width: 50px">年份</th>
+					<th style="width: 300px">摘要</th>
+				  </tr>
+				</thead>
+				
+				<tbody id="container-tbody">
+				</tbody>
+			  </table>
+		</div>
+	</div>
+
+	<!----------------------- script zone ------------------------->
+	<!-- tools -->
+	<script type="text/javascript" src="./dist/bundle-index.js"></script>
+</body>
+</html>	
