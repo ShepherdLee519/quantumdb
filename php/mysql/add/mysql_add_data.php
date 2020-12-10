@@ -3,8 +3,8 @@
 /*
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-04 20:38:59 
- * @Last Modified by:   Shepherd.Lee 
- * @Last Modified time: 2020-12-04 20:38:59 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-12-10 10:12:20
  */
 
 $title = $_GET["title"];
@@ -20,7 +20,6 @@ $abstract = $_GET["abstract"];
 $author = $_GET["author"];
 $authors = $_GET["authors"];
 $pdfname = $_GET["pdfname"];
-$dir = $_GET["dir"];
 
 // 0. 连接数据库
 @include "../mysqllink.php";
@@ -104,6 +103,6 @@ if ( !mysqli_query( $link, $sql_pdf )) {
     exit();
 } 
 
-echo 1;
+echo $paperid;
 
 ?>

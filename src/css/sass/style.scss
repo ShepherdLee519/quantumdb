@@ -4,7 +4,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-04-26 21:58:24 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-11-01 23:23:55
+ * @Last Modified time: 2020-12-09 21:28:15
  */
 
 
@@ -64,15 +64,30 @@ nav{
         width: 120px;
     }
     form button {
-        background-color: #3366CC !important;
         width: 100px;
         height: 45px;
         font-size: 17px;
+
+        &#search{
+            background-color: #3366CC !important;
+        }
     }
 }
 
 #container {
     .highlight {
         background-color: #FFFF66 !important;
+    }
+}
+
+
+.modal {
+    button{
+        background-color: #3366CC !important;
+        color: white !important;
+    }
+    input.btn{
+        background-color: #3366CC !important;
+        color: white !important;
     }
 }

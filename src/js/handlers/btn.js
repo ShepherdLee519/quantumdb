@@ -2,7 +2,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-04 19:50:32 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-04 20:19:47
+ * @Last Modified time: 2020-12-08 23:54:08
  */
 
 import { solveAbstract, hightLight } from './common';
@@ -44,7 +44,9 @@ function showResponse(json, key) {
  */
 export function initBtnHandler() {
     const $search = $('#search');
+    const $upload = $('#upload');
     
+    // 点击查询按钮
     $search.on('click', () => {
         let theme = $('#theme-input').val();
         let author = $('#author-input').val();
@@ -63,6 +65,13 @@ export function initBtnHandler() {
                 showResponse(res, key);
             });
         }
+
+        return false;
+    });
+
+    // 点击上传文献按钮
+    $upload.on('click', () => {
+        $('#uploadModal').modal('show');
 
         return false;
     });

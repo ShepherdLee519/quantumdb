@@ -2,7 +2,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-03-27 17:20:20 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-11-27 15:26:03
+ * @Last Modified time: 2020-12-09 17:49:04
  */
 
 /*
@@ -48,7 +48,7 @@ function replaceClass( $node, classA, classB ) {
  * 
  * @param {Object} $node 
  */
-function hide($node) {
+function hide( $node ) {
     if ( !Array.isArray( $node ) ) {
         $node.addClass('hidden');
     } else {
@@ -65,7 +65,7 @@ function hide($node) {
  * 
  * @param {Object} $node 
  */
-function show($node) {
+function show( $node ) {
     if ( !Array.isArray( $node ) ) {
         $node.removeClass('hidden');
     } else {

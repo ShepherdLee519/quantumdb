@@ -2,7 +2,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-03-27 17:12:30 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-11-24 22:09:34
+ * @Last Modified time: 2020-12-09 17:28:20
  */
 
 /*
@@ -48,7 +48,7 @@ function addFunction(...funcs) {
  */
 const commonConfig = {
     ok      : true,
-    hello   : false,
+    hello   : true,
     abandon : true
 };
 

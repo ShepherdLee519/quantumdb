@@ -2,7 +2,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-03-27 17:20:04 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-04 20:32:25
+ * @Last Modified time: 2020-12-09 20:06:12
  */
 
 /*
@@ -24,6 +24,27 @@ import { common, Add } from '../commonObj';
 function listen(eventType, fn, args = []) {
     $(document).on(eventType, function() {
         fn.apply(null, args);
+    });
+}
+
+/**
+ * 在document上监听复数个事件(触发先后无所谓)
+ *
+ * @param {Array<String>} eventTypes 监听的事件类型列表
+ * @param {Function} fn 事件函数
+ * @param {Array} args = [] 事件函数的参数
+ */
+function multilisten(eventTypes, fn, args = []) {
+    let count = 0, need = eventTypes.length;
+    
+    eventTypes.forEach(eventType => {
+        $(document).on(eventType, function() {
+            count++;
+            if (count == need) {
+                count++; // 避免重复触发
+                fn.apply(null, args);
+            }
+        });
     });
 }
 
@@ -88,6 +109,6 @@ function scroll($target, type, speed = 400) {
 
 // 加入common空间
 common[Add](
-    listen, trigger, delegate,
+    listen, multilisten, trigger, delegate,
     scroll
 );

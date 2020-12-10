@@ -2,7 +2,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-04 20:00:33 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-04 20:09:21
+ * @Last Modified time: 2020-12-09 19:28:20
  */
 
 
@@ -14,6 +14,7 @@
  */
 export function solveAbstract(abstract, i) {
     if (abstract === '') return '';
+    
     const LIMIT = 200;
     const link = `<a href="#" class="abstract-link" 
         data-state="close" data-index="${i}">>></a>`;

@@ -2,7 +2,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-03-27 17:18:38 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-11-27 19:31:43
+ * @Last Modified time: 2020-12-09 22:10:54
  */
 
 /*
@@ -152,6 +152,26 @@ function once(func) {
 }
 
 /**
+ * 调用 time 次后才真正调用 fn 函数
+ * 
+ * @param {Number} time 调用次数
+ * @param {Function} fn 原函数
+ * @returns {Function} 返回修改后的新函数
+ */
+function times(time, fn) {
+	let count = 0;
+
+	return function(...args) {
+		count++;
+
+		if (count === time) {
+			count = 0;
+			fn.apply(null, args);
+		}
+	}
+}
+
+/**
  * 在函数前注入新函数内容
  * 
  * @param {Function} func 
@@ -184,6 +204,6 @@ function after(func, afterContent) {
 common[Add](
     curry, partial,
 	map, multistep, run,
-	memoized, once,
+	memoized, once, times,
     before, after
 );

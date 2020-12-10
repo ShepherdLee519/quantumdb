@@ -17,39 +17,45 @@
 			<div class="navbar-header">
 				<a class="navbar-brand navbar-title" href="#">量子文献数据库</a>
 			</div>
+
+			<form class="navbar-form navbar-right" role="search">
+                <button type="submit" id="upload" class="btn btn-default">上传文献</button>
+            </form>
 		</div>
+		<!-- end container-fluid -->
 	</nav>
 
 	<!-- 主内容区域 -->
 	<div class="container-fluid" id="mainZone">
 		<div class="row col-lg-12 center-block" id="main">
+
+		<!-- 表单的筛选区域 -->
 		<form role="form" class="form-inline">
 			<div class="form-group">
-				<!-- <label for="theme-input" class="col-sm-2 control-label">主题</label> -->
 				<div class="col-sm-10">
 				  	<input type="text" class="form-control" id="theme-input" placeholder="主题" />
 				</div>
 			</div>
 			<div class="form-group">
-				<!-- <label for="author-input" class="col-sm-2 control-label">作者</label> -->
 				<div class="col-sm-10">
 				  	<input type="text" class="form-control" id="author-input" placeholder="作者" />
 				</div>
 			</div>
 			<div class="form-group">
-				<!-- <label for="year-input" class="col-sm-2 control-label">年份</label> -->
 				<div class="col-sm-10">
 				  	<input type="number	" class="form-control" id="year-input" placeholder="年份" />
 				</div>
 			</div>		
 			<div class="form-group">
-				<div class="col-sm-10">
-				  	<button type="search" class="btn btn-primary" id="search">查询</button>
+				<div class="col-sm-12">
+					<button type="search" class="btn btn-primary" id="search">查询</button>
 				</div>
 			</div>
 		</form>
 		</div>
+		<!-- end main -->
 		
+		<!-- 文献数据显示区域 -->
 		<div class="row col-lg-10 col-lg-push-1 center-block" id="container">
 
 			<table class="table table-hover" id="container-table">
@@ -65,8 +71,113 @@
 				
 				<tbody id="container-tbody">
 				</tbody>
-			  </table>
+			</table>
 		</div>
+		<!-- end container -->
+	</div>
+
+	<!-- 模态框显示区域 -->
+	<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" 
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" 
+						data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">上传文献</h4>
+				</div>
+
+				<div class="modal-body">
+					<!-- 单选按钮区域 -->
+					<div class="col-sm-6">
+						<label class="radio-inline">
+							<input type="radio" name="uploadtype" id="uploadOptionFolder" value="folder" checked> 上传文件夹
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="uploadtype" id="uploadOptionFile"  value="file"> 上传文件
+						</label>
+					</div>
+					<br /><hr />
+
+					<!-- 上传文件夹表单区域 -->
+					<form id="uploadFolderForm" class="form-horizontal" role="form" 
+						method="POST" enctype="multipart/form-data">
+						
+					<div class="form-group">
+						<div class="col-sm-3 control-label">选择文件夹</div>
+						<div class="col-sm-8">
+							<div class="input-group">
+								<input id="uploadFolder-location" class="form-control" />
+								<label class="input-group-btn">
+									<input type="button" id="uploadFolder-check" 
+										value="浏览文件夹" class="btn btn-primary" />
+								</label>
+							</div>
+						</div>
+						<input type="file" name="uploadFolder[]" accept="*/*" 
+							class="hidden" id="uploadFolder-file" multiple webkitdirectory />
+					</div>
+					<button type="submit" id="uploadFolder-submit" class="hidden"></button>
+
+					</form>
+
+					<!-- 上传 savedrecs 表单区域 -->
+					<form id="uploadSavedrecsForm" class="form-horizontal" role="form" 
+						method="POST" enctype="multipart/form-data">
+
+					<div class="form-group">
+						<div class="col-sm-3 control-label">savedrecs文件</div>
+						<div class="col-sm-8">
+							<div class="input-group">
+								<input id="savedrecs-location" class="form-control" />
+								<label class="input-group-btn">
+									<input type="button" id="savedrecs-check" 
+										value="浏览文件" class="btn btn-primary" />
+								</label>
+							</div>
+						</div>
+						<input type="file" name="savedrecs" accept="*/*" 
+							class="hidden" id="savedrecs-file" />
+					</div>
+					<button type="submit" id="savedrecs-submit" class="hidden"></button>
+
+					</form>
+
+					<!-- 上传文件夹表单区域 -->
+					<form id="uploadFileForm" class="form-horizontal hidden" role="form" 
+						method="POST" enctype="multipart/form-data">
+						
+					<div class="form-group">
+						<div class="col-sm-3 control-label">选择文件</div>
+						<div class="col-sm-8">
+							<div class="input-group">
+								<input id="uploadFile-location" class="form-control" />
+								<label class="input-group-btn">
+									<input type="button" id="uploadFile-check" 
+										value="浏览文件" class="btn btn-primary" />
+								</label>
+							</div>
+						</div>
+						<input type="file" name="uploadFile[]" accept="*/*" 
+							class="hidden" id="uploadFile-file" multiple />
+					</div>
+					<button type="submit" id="uploadFile-submit" class="hidden"></button>
+
+					</form>
+					<!-- end uploadFolderForm -->
+
+					<!-- 上传文件表单区域 -->
+				</div>
+				<!-- end modal-body -->
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" id="uploadModalCancel" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="uploadModalConfrim">确认</button>
+				</div>
+			</div>
+			<!-- end modal-content -->
+		</div>
+		<!-- end modal -->
 	</div>
 
 	<!----------------------- script zone ------------------------->
