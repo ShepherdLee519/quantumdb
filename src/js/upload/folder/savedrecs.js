@@ -2,28 +2,27 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-04-30 13:48:05 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-10 10:03:50
+ * @Last Modified time: 2020-12-14 13:12:23
  */
 
-import { common as $$ } from '../common/common';
-import { Data } from '../global';
-import { solve } from '../solve/solve';
+import { common as $$ } from '../../common/common';
+import { solveFolder } from '../../solve/solve';
 
 
 // 相关的 DOM 对象的获取
 const $modal = $('#uploadModal');
-$$.inject( $('#uploadFolderForm') );
-const $location     = $$._('#uploadFolder-location');
-const $check        = $$._('#uploadFolder-check');
-const $file         = $$._('#uploadFolder-file');
+$$.inject( $('#uploadSavedrecsForm') );
+const $location  = $$._('#savedrecs-location');
+const $check     = $$._('#savedrecs-check');
+const $file      = $$._('#savedrecs-file');
 $$.reject();
 
 
 /**
  * uoloadFolderForm 中的与上传相关的一些 handler
  */
-function uploadFolderFormHandlers() {
-    // 上传文件夹
+function uploadSavedrecsFormHandlers() {
+    // 上传 savedrecs.html
     $file.change( () => {
         $location.val( $file.val() );
     });
@@ -37,7 +36,7 @@ function uploadFolderFormHandlers() {
 /**
  * 清空 location 与 file 的 input 的值
  */
-function uploadFolderClearHandler() {
+function uploadSavedrecsClearHandler() {
     $file.val('');
     $location.val('');
 }
@@ -46,11 +45,11 @@ function uploadFolderClearHandler() {
 /**
  * 取消文件的上传
  */
-function uploadFolderCancelHandler() {
+function uploadSavedrecsCancelHandler() {
     const $cancel = $('#uploadModalCancel');
     
     $cancel.on('click', () => {
-        uploadFolderClearHandler();
+        uploadSavedrecsClearHandler();
         $modal.modal('hide');
         
         return false;
@@ -61,8 +60,8 @@ function uploadFolderCancelHandler() {
 /**
  * 涉及文件的上传
  */
-function uploadFolderConfirmHandler() {
-    const $form = $('#uploadFolderForm');
+function uploadSavedrecsConfirmHandler() {
+    const $form = $('#uploadSavedrecsForm');
     const $confirm = $('#uploadModalConfrim');
     
     $confirm.on('click', function() {
@@ -75,20 +74,17 @@ function uploadFolderConfirmHandler() {
         const formData = new FormData( $form[0] );
 
         $.ajax({
-            type: 'POST', url:'./php/upload/upload_folder.php',
+            type: 'POST', url:'./php/upload/upload_savedrecs.php',
             data: formData, cache: false, dataType: 'json',
             contentType: false, processData: false,
             success: function(res) {
-                // if ( +res < 0) {
-                //     console.log('Error Code: ', res);
-                // } else {
-                //     console.log('Upload <PDF> Successfully!');
-                //     solve();
-                //     $modal.modal('hide');
-                // }
-                $modal.modal('hide');
-                Data.set('filenames', JSON.parse(JSON.stringify(res)));
-                solve();
+                if ( +res < 0) {
+                    console.log('Error Code: ', res);
+                } else {
+                    console.log('Upload <savedrecs> Successfully!');
+                    solveFolder();
+                    $modal.modal('hide');
+                }
             }
         });
 
@@ -101,10 +97,10 @@ function uploadFolderConfirmHandler() {
  * 上传文件部分的功能的初始化\
  * 注意 点击按钮触发模态框的部分在 btn.js 中
  */
-export function initUploadFolder() {
+export function initUploadSavedrecs() {
     $$.multistep([
-        uploadFolderFormHandlers,
-        uploadFolderCancelHandler,
-        uploadFolderConfirmHandler
+        uploadSavedrecsFormHandlers,
+        uploadSavedrecsCancelHandler,
+        uploadSavedrecsConfirmHandler
     ]);
 }

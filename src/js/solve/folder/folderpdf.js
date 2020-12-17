@@ -2,11 +2,11 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-09 19:33:42 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-10 10:24:21
+ * @Last Modified time: 2020-12-15 12:31:00
  */
 
-import { common as $$ } from '../common/common';
-import { Data } from '../global';
+import { common as $$ } from '../../common/common';
+import { Data } from '../../global';
 
 
 /**
@@ -16,7 +16,7 @@ import { Data } from '../global';
  * @param {Object} $info savedrecs $对象
  * @param {Function} success 成功写入数据库后调用的函数
  */
-function solvePDF(filename, index, $info, success) {
+function solveFolderPDF(filename, index, $info, success) {
     console.log(filename);
 
     // 1. 正则提取出title
@@ -30,11 +30,10 @@ function solvePDF(filename, index, $info, success) {
     // 3. 组装json值
     let json = { pdfname: filename, dir: Data.get('dir') };
     let keys = [
-        'title', 'source', 'type', 'volume', 'beginpage', 
-        'endpage', 'doi', 'date', 'year', 'abstract'
+        'title', 'year', 'abstract'
     ];
     let targets = [
-        'TI', 'SO', 'PT', 'VL', 'BP', 'EP', 'DI', 'PD', 'PY', 'AB'
+        'TI', 'PY', 'AB'
     ];
     keys.forEach( (key, i) => {
         let $td = $table.find(`td:contains(${targets[i]})`), str;
@@ -61,22 +60,23 @@ function solvePDF(filename, index, $info, success) {
     else json.authors = json.author.join('; ');
     
     // 4. 添加入数据库
-    $.get('./php/mysql/add/mysql_add_data.php', json, res => {
+    $.get('./php/mysql/add/mysql_add_data_endnote.php', json, res => {
         console.log(res);
         if (res) {
             console.log('Insert ' + json.title); 
             success();
             // res 值为 index
             $$.beacon('./php/update_pdfname.php', 
-                { name: index + '.pdf', title: title, index: res });
+                { name: index + '.pdf', index: res });
         }
     });
 }
 
+
 /**
- * 逐一处理所有PDF的外壳函数，实际处理的是solvePDF
+ * 逐一处理所有PDF的外壳函数，实际处理的是solveFolderPDF
  */
-export function solvePDFs() {
+export function solveFolderPDFs() {
     console.log('Finish!!!');
 
     const fileNames = Data.get('filenames');
@@ -88,6 +88,6 @@ export function solvePDFs() {
     });
 
     fileNames.forEach( (filename, i) => {
-        solvePDF(filename, i + 1, savedrecs, success);
+        solveFolderPDF(filename, i + 1, savedrecs, success);
     });
 }

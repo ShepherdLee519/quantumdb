@@ -77,30 +77,53 @@
 	</div>
 
 	<!-- 模态框显示区域 -->
+	<!-- 上传文件与文件夹模态框 -->
 	<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" 
-		aria-labelledby="myModalLabel" aria-hidden="true">
+		aria-labelledby="uploadModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" 
 						data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">上传文献</h4>
+					<h4 class="modal-title" id="uploadModalLabel">上传文献</h4>
 				</div>
 
 				<div class="modal-body">
 					<!-- 单选按钮区域 -->
 					<div class="col-sm-6">
 						<label class="radio-inline">
-							<input type="radio" name="uploadtype" id="uploadOptionFolder" value="folder" checked> 上传文件夹
+							<input type="radio" name="uploadtype" id="uploadOptionFile" value="file" checked> 上传文件
 						</label>
 						<label class="radio-inline">
-							<input type="radio" name="uploadtype" id="uploadOptionFile"  value="file"> 上传文件
+							<input type="radio" name="uploadtype" id="uploadOptionFolder" value="folder"> 上传文件夹
 						</label>
 					</div>
 					<br /><hr />
 
 					<!-- 上传文件夹表单区域 -->
-					<form id="uploadFolderForm" class="form-horizontal" role="form" 
+					<form id="uploadFileForm" class="form-horizontal" role="form" 
+						method="POST" enctype="multipart/form-data">
+						
+					<div class="form-group">
+						<div class="col-sm-3 control-label">选择文件</div>
+						<div class="col-sm-8">
+							<div class="input-group">
+								<input id="uploadFile-location" class="form-control" />
+								<label class="input-group-btn">
+									<input type="button" id="uploadFile-check" 
+										value="浏览文件" class="btn btn-primary" />
+								</label>
+							</div>
+						</div>
+						<input type="file" name="uploadFile[]" accept="*/*" 
+							class="hidden" id="uploadFile-file" multiple />
+					</div>
+					<button type="submit" id="uploadFile-submit" class="hidden"></button>
+
+					</form>
+
+					<!-- 上传文件夹表单区域 -->
+					<form id="uploadFolderForm" class="form-horizontal hidden" role="form" 
 						method="POST" enctype="multipart/form-data">
 						
 					<div class="form-group">
@@ -122,7 +145,7 @@
 					</form>
 
 					<!-- 上传 savedrecs 表单区域 -->
-					<form id="uploadSavedrecsForm" class="form-horizontal" role="form" 
+					<form id="uploadSavedrecsForm" class="form-horizontal hidden" role="form" 
 						method="POST" enctype="multipart/form-data">
 
 					<div class="form-group">
@@ -142,28 +165,6 @@
 					<button type="submit" id="savedrecs-submit" class="hidden"></button>
 
 					</form>
-
-					<!-- 上传文件夹表单区域 -->
-					<form id="uploadFileForm" class="form-horizontal hidden" role="form" 
-						method="POST" enctype="multipart/form-data">
-						
-					<div class="form-group">
-						<div class="col-sm-3 control-label">选择文件</div>
-						<div class="col-sm-8">
-							<div class="input-group">
-								<input id="uploadFile-location" class="form-control" />
-								<label class="input-group-btn">
-									<input type="button" id="uploadFile-check" 
-										value="浏览文件" class="btn btn-primary" />
-								</label>
-							</div>
-						</div>
-						<input type="file" name="uploadFile[]" accept="*/*" 
-							class="hidden" id="uploadFile-file" multiple />
-					</div>
-					<button type="submit" id="uploadFile-submit" class="hidden"></button>
-
-					</form>
 					<!-- end uploadFolderForm -->
 
 					<!-- 上传文件表单区域 -->
@@ -173,6 +174,49 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" id="uploadModalCancel" data-dismiss="modal">取消</button>
 					<button type="button" class="btn btn-primary" id="uploadModalConfrim">确认</button>
+				</div>
+			</div>
+			<!-- end modal-content -->
+		</div>
+		<!-- end modal -->
+	</div>
+
+	<!-- 确认文件上传结果的模态框 -->
+	<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" 
+		aria-labelledby="checkModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width: 920px" >
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" 
+						data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="checkModalLabel">确认文献上传</h4>
+				</div>
+
+				<div class="modal-body">
+					<!-- 确认文件上传区域 -->
+					<form id="checkForm" class="form-horizontal" role="form">
+						<table class="table table-hover">
+							<thead>
+							  <tr>
+								<th style="width: 50px">序号</th>
+								<th style="width: 240px">标题</th>
+								<th style="width: 150px">作者</th>
+								<th style="width: 300px">摘要</th>
+							  </tr>
+							</thead>
+							
+							<tbody id="check-tbody">
+								
+							</tbody>
+						</table>
+					</form>
+
+				</div>
+				<!-- end modal-body -->
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" id="checkCancel" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="checkConfrim">确认上传</button>
 				</div>
 			</div>
 			<!-- end modal-content -->

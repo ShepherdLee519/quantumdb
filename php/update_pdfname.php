@@ -4,13 +4,12 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-11-26 22:42:04 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-10 10:08:57
+ * @Last Modified time: 2020-12-14 14:42:53
  */
 
 // 提取完 pdf 对应数据后移动 pdf 至父目录下 
 
 $name = $_GET["name"];
-$title = $_GET["title"];
 $index = $_GET["index"];
 
 $oldname = "../PDF/target/" . $name;

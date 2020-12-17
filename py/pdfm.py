@@ -1,9 +1,13 @@
+#coding = utf-8
 #!/usr/bin/env python
 import sys
+import os
+import json
 from itertools import islice
 from pprint import pprint
 from pdfminer.high_level import extract_pages
 from pdfminer.layout import LTTextContainer, LTChar
+
 
 def findMaxFontSize(pdf):
     """ 求出目标 pdf 第一页中的最大字体大小并返回
@@ -39,7 +43,7 @@ def extractTitle(pdf, size):
     :param size: 获取的最大字体大小
     :return: 标题 
     """
-    print('[title]')
+    # print('[title]')
     string = ''
 
     for page_layout in extract_pages(pdf, page_numbers=0):
@@ -70,7 +74,7 @@ def extractTitle(pdf, size):
                 break # end for element
             elem_count += 1
         break # end for page_layout
-    return string.replace('\n', '').encode('utf-8'), elem_count, line_count
+    return string.replace('\n', '').encode('gbk', 'ignore'), elem_count, line_count
 
 def extractAuthor(pdf, elem, line):
     """ 根据作者所在元素等位置信息求出目标 pdf 中作者信息并处理后返回
@@ -80,7 +84,7 @@ def extractAuthor(pdf, elem, line):
     :param line: 作者信息所在行的偏移量
     :return: 作者信息列表
     """
-    print('[Authors]')
+    # print('[Authors]')
     author_str = ''
 
     for page_layout in extract_pages(pdf, page_numbers=0):
@@ -122,8 +126,7 @@ def extractAuthor(pdf, elem, line):
         break # end for page_layout
 
     author_str = author_str.replace(u'\xa0', u'').replace('&', ',').replace('and ', ',')
-    authors = [s.strip().encode('utf-8') for s in author_str.split(',') if s.strip() != '']
-    return authors
+    return author_str.encode('gbk', 'ignore')
 
 def extractAbstract(pdf, elem):
     """ 根据摘要可能所在的元素位置求出目标 pdf 中摘要文字并返回
@@ -132,7 +135,7 @@ def extractAbstract(pdf, elem):
     :param elem: 摘要可能所在的元素位置
     :return: 摘要
     """
-    print('[Abstract]')
+    # print('[Abstract]')
     abstract = ''; hasAbstract = False
     LIMIT = 10 # 最多尝试寻找的元素个数
     elem_count = 0
@@ -162,47 +165,21 @@ def extractAbstract(pdf, elem):
             elif LIMIT == elem_count: break # end for element 
             elem_count += 1
         break
-    return abstract.replace('\n', '').encode('utf-8'), hasAbstract, elem_count
+    return abstract.replace('\n', '').encode('gbk', 'ignore'), hasAbstract, elem_count
 
-def extractAffiliation(pdf, elem_begin, elem_end):
-    """ 根据作者单位可能所在的元素位置求出目标 pdf 中作者单位信息并返回
-
-    :param pdf: 待处理的 pdf 文件url
-    :param elem_begin: 作者单位可能所在的元素位置
-    :param elem_end: 作者摘要所在元素的位置或查找摘要的上限位置
-    :return: 作者单位信息
-    """
-    print('[Affiliation]')
-    affiliation = ''
-    elem_count = 0; hasAffiliation = True
-
-    for page_layout in extract_pages(pdf, page_numbers=0):
-        for element in page_layout:
-            if not isinstance(element, LTTextContainer): continue
-
-            if elem_count < elem_begin: 
-                elem_count += 1
-                continue
-            elif elem_count == elem_end: # 到达边界 作者单位信息不存在
-                hasAffiliation = False
-                break # end for element
-            else:
-                affiliation += element.get_text()
-                break # end for element
-            elem_count += 1
-        break # end for page_layout
-    return hasAffiliation, affiliation.encode('utf-8')
-
-def solvePDF(pdf_name):
+def solvePDF(num):
+    pdf_name = os.path.abspath('../../PDF/target/target' + str(num) + '.pdf')
     maxFontSize = findMaxFontSize(pdf_name)
+
     title, elem, line = extractTitle(pdf_name, maxFontSize)
-    print(title)
+    print(title.decode('utf-8', 'ignore'))
+
     author = extractAuthor(pdf_name, elem + 1, line)
-    pprint(author)
+    print(author.decode('utf-8', 'ignore'))
+
     abstract, hasAbstract, elemNum = extractAbstract(pdf_name, elem + 2)
-    if hasAbstract: print(abstract)
-    hasAffiliation, string = extractAffiliation(pdf_name, elem + 2, elemNum)
-    if hasAffiliation: print(string)
+    if not hasAbstract: abstract = ''
+    print(abstract.decode('utf-8', 'ignore'))
 
 if __name__ == "__main__":
-    solvePDF(sys.argv[1])
+    solvePDF((int)(sys.argv[1]))

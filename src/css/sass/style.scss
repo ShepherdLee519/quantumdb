@@ -4,7 +4,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-04-26 21:58:24 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-09 21:28:15
+ * @Last Modified time: 2020-12-17 00:03:02
  */
 
 
@@ -77,6 +77,15 @@ nav{
 #container {
     .highlight {
         background-color: #FFFF66 !important;
+    }
+
+    .download-icon{
+        color: #AAA;
+
+        &:hover{
+            cursor: pointer;
+            color: #3366CC;
+        }
     }
 }
 

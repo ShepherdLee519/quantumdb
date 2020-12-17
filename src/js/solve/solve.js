@@ -2,31 +2,33 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-09 19:35:29 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-10 10:07:15
+ * @Last Modified time: 2020-12-14 13:07:06
  */
 
 import { common as $$ } from '../common/common';
-import { readFilenames, readSavedrecs } from './read';
-import { solvePDFs } from './solvepdf';
+import { readSavedrecs } from './folder/read';
+import { solveFolderPDFs } from './folder/folderpdf';
+import { solveFilePDFs } from './file/filepdf';
 
 
 /**
- * 上传完 pdf 后实际触发的处理函数(处理pdf -> 写入数据库)
+ * 上传完 pdf(文件夹) 后实际触发的处理函数(处理pdf -> 写入数据库)
  */
-export const solve = $$.times(2, function solve() {
+export const solveFolder = $$.times(2, function solve() {
     // 路径相对于 ./php/read_file.php
-    const pdfPath = '../PDF/target/';
     const savedrecsPath = '../PDF/savedrecs/savedrecs.html';
 
-    // $$.multistep([
-    //     readFilenames,
-    //     readSavedrecs
-    // ], [
-    //     [pdfPath], 
-    //     [savedrecsPath]
-    // ]);
+    // trigger('readSavedrecs');
     readSavedrecs(savedrecsPath);
-
-    // $$.multilisten(['readFilenames', 'readSavedrecs'], solvePDFs);
-    $$.listen('readSavedrecs', solvePDFs);
+    $$.listen('readSavedrecs', solveFolderPDFs);
 });
+
+
+/**
+ * 上传完文件后实际触发的处理函数
+ * 
+ * @param {Number} num 待处理文件数量
+ */
+export function solveFiles(num) {
+    solveFilePDFs(num);
+}

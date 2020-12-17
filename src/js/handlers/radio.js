@@ -2,13 +2,13 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-09 17:22:01 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-09 17:50:17
+ * @Last Modified time: 2020-12-15 12:33:54
  */
 
 import { common as $$ } from '../common/common';
 
 
-let radioVal = 'folder';
+export let radioVal = 'file';
 const $folder       = $('#uploadFolderForm');
 const $savedrecs    = $('#uploadSavedrecsForm');
 const $file         = $('#uploadFileForm');

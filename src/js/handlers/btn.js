@@ -2,7 +2,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-04 19:50:32 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-08 23:54:08
+ * @Last Modified time: 2020-12-17 00:04:02
  */
 
 import { solveAbstract, hightLight } from './common';
@@ -25,9 +25,11 @@ function showResponse(json, key) {
         str += `
         <tr>
             <td>${i + 1}</td>
-            <td>${hightLight(data.title, key.theme)}</td>
-            <td>${hightLight(data.author, key.author)}</td>
-            <td>${data.year}</td>
+            <td>${hightLight(data.title, key.theme)} 
+                <span class="glyphicon glyphicon-cloud-download download-icon"
+                    data-index=${data.id} title="点击下载文件"></td>
+            <td>${hightLight(data.authors, key.author)}</td>
+            <td>${data.year ? data.year : ' — '}</td>
             <td>${hightLight(solveAbstract(data.abstract, i), key.theme)}</td>
         </tr>
         `;
