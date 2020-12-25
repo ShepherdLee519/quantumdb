@@ -2,7 +2,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-10 20:02:43 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-15 13:02:19
+ * @Last Modified time: 2020-12-25 19:33:50
  */
 
 import { common as $$ } from '../../common/common';
@@ -24,6 +24,9 @@ function solveFilePDF(num, filedatas, success) {
         data: { filenum: num },
         dataType: 'json',
         success: res => {
+            console.log(`upload filenum: ${num}`);
+            console.log(`Response data: ${res}`);
+
             if ( !Array.isArray(res) ) {
                 console.error('Wrong response occured in <solveFilePDF>');
                 return false;
@@ -31,10 +34,12 @@ function solveFilePDF(num, filedatas, success) {
 
             // 2. 额外处理author
             let authors = res[1];
-            let author = authors.split(',')
-                .map(v => v.trim())
-                .filter(v => v != '');
-            res[1] = author;
+            if ( !$$.isundef(authors) ) {
+                let author = authors.split(',')
+                    .map(v => v.trim())
+                    .filter(v => v != '');
+                res[1] = author;
+            } 
 
             // 3. 保存至全局 Data 中
             filedatas[num - 1] = res;
