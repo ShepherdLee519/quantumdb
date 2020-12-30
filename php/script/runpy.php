@@ -1,9 +1,8 @@
 <?php
 
-$filenum = $_GET['filenum'];
+@include "../config/script_config.php";
 
-$PyPath = "C:\\Users\\lenovo\\AppData\\Local\\Programs\\Python\\Python36\\python.exe";
-$scriptPath = "C:\\wamp64\\www\\quantumDB\\py\\pdfm.py";
+$filenum = $_GET['filenum'];
 
 $call = $PyPath.' '.$scriptPath.' '. $filenum. " 2>&1";
 exec( $call, $resArr );

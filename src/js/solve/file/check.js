@@ -2,7 +2,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-11 16:29:49 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-15 13:03:43
+ * @Last Modified time: 2020-12-30 12:59:36
  */
 
 import { common as $$ } from '../../common/common';
@@ -31,6 +31,8 @@ function createTr(index, title, authors, abstract) {
         <td>
             <textarea class="authors form-control" rows=4>${authors}</textarea></td>
         <td>
+            <input type="number" class="year form-control" /></td>
+        <td>
             <textarea class="abstract form-control" rows=4>${abstract}</textarea></td>
     </tr>`.trim();
 
@@ -53,6 +55,7 @@ export function getCheckData() {
         obj['title'] = $$._('.title').val();
         obj['authors'] = $$._('.authors').val();
         obj['author'] = (obj['authors']).split(',');
+        obj['year'] = +$$._('.year').val();
         obj['abstract'] = $$._('.abstract').val();
         $$.reject();
 

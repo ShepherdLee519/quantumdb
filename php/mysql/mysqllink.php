@@ -4,14 +4,10 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-04 20:38:59 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-04 20:39:38
+ * @Last Modified time: 2020-12-30 14:11:29
  */
 
-// -----------------mysql参数----------------------------------------------
-$servername = "localhost:3307";
-$usern = "root";
-$passw = "hello";
-$dbname = "paper";
+@include "../../config/mysql_config.php";
 
 // -----------------连接mysql服务器----------------------------------------------
 $link = mysqli_connect( $servername, $usern, $passw );

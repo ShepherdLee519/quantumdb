@@ -4,12 +4,13 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-04 20:38:59 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-15 12:49:54
+ * @Last Modified time: 2020-12-30 13:18:49
  */
 
 $title = $_GET["title"];
 $abstract = $_GET["abstract"];
 $author = $_GET["author"];
+$year = $_GET["year"];
 $authors = $_GET["authors"];
 
 
@@ -19,9 +20,9 @@ mysqli_query( $link, "set names 'utf8'"); // 在插入数据执行前添加
 
 // 1. 加入paper表
 $sql_paper = "INSERT INTO paper (
-	`title`, `abstract`, `authors`
+	`title`, `abstract`, `year`, `authors`
 ) VALUES (
-    '$title', \"$abstract\", \"$authors\"
+    '$title', \"$abstract\", $year, \"$authors\"
 )";
 
 if ( !mysqli_query( $link, $sql_paper )) {
