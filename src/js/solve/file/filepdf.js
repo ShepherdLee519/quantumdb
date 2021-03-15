@@ -2,7 +2,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-10 20:02:43 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-25 19:33:50
+ * @Last Modified time: 2021-01-25 21:09:51
  */
 
 import { common as $$ } from '../../common/common';
@@ -58,6 +58,7 @@ export function solveFilePDFs(num) {
     Data.set('filedatas', Array.from({length: num}, _ => []));
     const success = $$.times(num, function() {
         console.log(Data.get('filedatas'));
+        // 建立确认table
         initCheckTable();
     });
 

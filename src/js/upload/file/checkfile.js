@@ -2,7 +2,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-11 20:46:21 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-15 12:58:04
+ * @Last Modified time: 2021-03-09 23:47:42
  */
 
 import { common as $$ } from '../../common/common';
@@ -21,12 +21,15 @@ const $modal = $('#checkModal');
  * @param {Function} success 全部上传成功后调用
  */
 function uploadCheckedFile(obj, num, success) {
+    obj.num = num;
     $.get('./php/mysql/add/mysql_add_data_file.php', obj, res => {
         try {
             let index = +res; // 数据库中的id值
             console.log('index: ', index);
             success();
-            moveCheckedFile(`target${num}.pdf`, index);
+            if (index != -1) {
+                moveCheckedFile(`target${num}.pdf`, index);
+            }
         } catch(err) {
             console.error('Error occured in <uploadCheckedFile>');
         }

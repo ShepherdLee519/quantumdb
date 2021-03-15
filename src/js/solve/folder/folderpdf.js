@@ -2,7 +2,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-09 19:33:42 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-15 12:31:00
+ * @Last Modified time: 2021-01-25 22:37:29
  */
 
 import { common as $$ } from '../../common/common';
@@ -17,6 +17,8 @@ import { Data } from '../../global';
  * @param {Function} success 成功写入数据库后调用的函数
  */
 function solveFolderPDF(filename, index, $info, success) {
+    // 0. 对filename的预处理
+    filename = filename.replace(/_/g, '');
     console.log(filename);
 
     // 1. 正则提取出title
@@ -45,6 +47,7 @@ function solveFolderPDF(filename, index, $info, success) {
         }
         json[key] = str.replace(/"/g, '\'');
     });
+    if (json.title === '') json.title = title;
     json.title = (json.title).replace(/[*?"'<>|/\\]/g, '');
 
     json.author = [];
@@ -56,8 +59,13 @@ function solveFolderPDF(filename, index, $info, success) {
             json.author.push(author.trim());
         });
     }
-    if ( !json.author.length ) return;
+    if ( !json.author.length ) {
+        json.author.push('-');
+        json.authors = '-';
+    }
     else json.authors = json.author.join('; ');
+
+    console.log(json);
     
     // 4. 添加入数据库
     $.get('./php/mysql/add/mysql_add_data_endnote.php', json, res => {

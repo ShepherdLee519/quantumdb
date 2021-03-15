@@ -2,7 +2,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-04 19:50:32 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-17 00:04:02
+ * @Last Modified time: 2021-01-25 22:45:22
  */
 
 import { solveAbstract, hightLight } from './common';
@@ -29,7 +29,7 @@ function showResponse(json, key) {
                 <span class="glyphicon glyphicon-cloud-download download-icon"
                     data-index=${data.id} title="点击下载文件"></td>
             <td>${hightLight(data.authors, key.author)}</td>
-            <td>${data.year ? data.year : ' — '}</td>
+            <td>${(data.year && +(data.year) != 0) ? data.year : ' — '}</td>
             <td>${hightLight(solveAbstract(data.abstract, i), key.theme)}</td>
         </tr>
         `;

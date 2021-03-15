@@ -4,13 +4,15 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-09 15:49:24 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-16 23:53:18
+ * @Last Modified time: 2021-03-09 23:53:55
  */
 
 require_once '../helper.php';
 
 $str = "uploadFile"; // name(input)
 $FILE_PATH = "../../PDF/target/"; // 文件上传文件夹，注意文件夹的路径末尾需要有'/'
+_deldir( $FILE_PATH );
+_mkdir( $FILE_PATH );
 $FILE_MAX_SIZE = 8 * 1024 * 1024; // 当前最大上传大小为 8M - 需要在php.ini中修改
 
 

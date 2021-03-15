@@ -4,11 +4,13 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-09 15:49:24 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-09 19:52:52
+ * @Last Modified time: 2021-03-09 23:55:22
  */
 
 $str = "savedrecs"; // name(input)
 $FILE_PATH = "../../PDF/savedrecs/"; // 文件上传文件夹，注意文件夹的路径末尾需要有'/'
+_deldir( $FILE_PATH );
+_mkdir( $FILE_PATH );
 $FILE_MAX_SIZE = 8 * 1024 * 1024; // 当前最大上传大小为 8M - 需要在php.ini中修改
 
 setlocale(LC_ALL, 'zh_CN.UTF8'); // 设置编码格式否则中文文件乱码

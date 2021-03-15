@@ -2,7 +2,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-04-30 13:48:05 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-16 23:47:43
+ * @Last Modified time: 2021-03-09 22:15:16
  */
 
 import { common as $$ } from '../../common/common';
@@ -23,7 +23,7 @@ $$.reject();
  * uoloadFileForm 中的与上传相关的一些 handler
  */
 function uploadFileFormHandlers() {
-    // 上传文件夹
+    // 上传文件
     $file.change( () => {
         $location.val( $file.val() );
     });
@@ -76,6 +76,7 @@ function uploadFileConfirmHandler() {
         // 组装用于post的表单数据对象
         const formData = new FormData( $form[0] );
 
+        // 上传至临时文件夹 - 未正式上传
         $.ajax({
             type: 'POST', url:'./php/upload/upload_file.php',
             data: formData, cache: false, dataType: 'json',
@@ -83,6 +84,7 @@ function uploadFileConfirmHandler() {
             success: function(res) {
                 $modal.modal('hide');
                 console.log(`upload files: ${res}`);
+                // 进一步处理 - 正式上传文件
                 solveFiles(+res);
             }
         });
