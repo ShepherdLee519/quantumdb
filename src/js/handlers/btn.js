@@ -2,7 +2,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-12-04 19:50:32 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2021-01-25 22:45:22
+ * @Last Modified time: 2021-04-24 14:44:23
  */
 
 import { solveAbstract, hightLight } from './common';
@@ -23,7 +23,7 @@ function showResponse(json, key) {
     let str = '';
     json.forEach( (data, i) => {
         str += `
-        <tr>
+        <tr data-index=${data.id} data-title="${data.title}">
             <td>${i + 1}</td>
             <td>${hightLight(data.title, key.theme)} 
                 <span class="glyphicon glyphicon-cloud-download download-icon"
@@ -31,6 +31,8 @@ function showResponse(json, key) {
             <td>${hightLight(data.authors, key.author)}</td>
             <td>${(data.year && +(data.year) != 0) ? data.year : ' — '}</td>
             <td>${hightLight(solveAbstract(data.abstract, i), key.theme)}</td>
+            <td><span class="remove-icon glyphicon glyphicon-trash" title="删除文献"></span>
+                <span class="edit-icon glyphicon glyphicon-edit" title="编辑文献信息"></span></td>
         </tr>
         `;
         abstracts.push(data.abstract);

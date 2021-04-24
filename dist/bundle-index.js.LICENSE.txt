@@ -10,7 +10,11 @@
 
 /*! exports provided: initDownloadHandler */
 
+/*! exports provided: initEditConfirmHandler, initEditHandler */
+
 /*! exports provided: initLinkHandler */
+
+/*! exports provided: initRemoveHandler */
 
 /*! exports provided: initUploadCheckedFile */
 
@@ -57,6 +61,10 @@
   \*********************************/
 
 /*!*********************************!*\
+  !*** ./src/js/handlers/edit.js ***!
+  \*********************************/
+
+/*!*********************************!*\
   !*** ./src/js/handlers/link.js ***!
   \*********************************/
 
@@ -74,6 +82,10 @@
 
 /*!***********************************!*\
   !*** ./src/js/handlers/common.js ***!
+  \***********************************/
+
+/*!***********************************!*\
+  !*** ./src/js/handlers/remove.js ***!
   \***********************************/
 
 /*!************************************!*\

@@ -4,7 +4,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-04-26 21:58:24 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-12-17 00:03:02
+ * @Last Modified time: 2021-04-24 14:35:15
  */
 
 
@@ -85,6 +85,24 @@ nav{
         &:hover{
             cursor: pointer;
             color: #3366CC;
+        }
+    }
+
+    .remove-icon{
+        color: #CCC;
+
+        &:hover{
+            cursor: pointer;
+            color: #FF6666;
+        }
+    }
+
+    .edit-icon {
+        color: #CCC;
+
+        &:hover{
+            cursor: pointer;
+            color: #0099CC;
         }
     }
 }
